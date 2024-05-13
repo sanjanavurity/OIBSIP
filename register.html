@@ -4,7 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(#fff, seagreen);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center; /* Center the container horizontally */
+            align-items: center; /* Center the container vertically */
+            height: 100vh; /* Make the body full height */
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;       
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 10px 0px #888888;
+            background-color: mediumaquamarine;
+        }
+        h1 {
+            font-family: "SHOWCARD GOTHIC";
+            font-size: 40px;
+            font-weight: bolder;
+            color: rgb(43, 68, 43);
+        }
+
+        .button {
+            background-color: rgb(39, 61, 39);
+            color: #f1f5f2;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bolder;
+            margin: 10px; /* Add margin to separate buttons */
+        }
+
+        form {
+         
+         margin-top: 20px;
+
+     }
+
+     label {
+            display:flex;
+            margin: 10px 0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .password-container input[type="password"] {
+            width: 38%; /* Set the width for each password field */
+        }
+
+        input{
+            height:2em;
+            width:28.5rem;
+            border-radius: 20px;
+        }
+        input[type="submit"] {
+            background-image: linear-gradient(to right, rgb(43, 68, 43), darkcyan);
+            color: black;
+            font-weight: bolder;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            width:30.8rem;
+            cursor: pointer;
+            font-size: 20px;
+            font-family: "SHOWCARD GOTHIC";
+        }
+        input{
+            padding:0.5rem;
+            padding-right: 30px;
+        
+        }
+     
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,7 +97,7 @@
             <input type="email" id="email" name="email" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Register</button>
+            <button class="button" type="submit">Register</button>
         </form>
     </div>
 </body>

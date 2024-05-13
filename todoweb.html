@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do App</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg");
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-image: linear-gradient(to bottom right, #334557, #8599ad, #b1b5bd);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.column {
+    width: 100%;
+}
+
+.column1 {
+    width: 100%;
+    text-align: right;
+    padding-bottom: 10px;
+}
+
+.column h2 {
+    color: #333;
+}
+
+.column1 h2 {
+    color: #333;
+    margin-top: -50px;
+}
+
+form {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #f4f4f4;
+    width: 360px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    animation: drop 0.5s ease forwards;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: #161515;
+    font-weight: bold;
+}
+
+button.delete {
+    background-color: #ff3333;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.checkmark {
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 2px solid #4caf50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.checkmark:before {
+    content: '\2713';
+    color: #4caf50;
+    font-size: 18px;
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <form id="todo-form">
+        <input type="text" id="todo-input" placeholder="Add new task...">
+        <button type="submit">Add</button>
+    </form>
+    <div class="column">
+        <h2>Pending Tasks</h2>
+        <ul id="pending-tasks"></ul>
+    </div>
+    <div class="column1">
+        <h2>Completed Tasks</h2>
+        <ul id="completed-tasks"></ul>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const todoForm = document.getElementById('todo-form');
+    const todoInput = document.getElementById('todo-input');
+    const pendingTasksList = document.getElementById('pending-tasks');
+    const completedTasksList = document.getElementById('completed-tasks');
+
+    todoForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const taskName = todoInput.value.trim();
+        if (taskName !== '') {
+            addTask(taskName);
+            todoInput.value = '';
+        }
+    });
+
+    function addTask(taskName) {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('div');
+        checkbox.className = 'checkmark';
+        const span = document.createElement('span');
+        span.textContent = taskName;
+        li.appendChild(checkbox);
+        li.appendChild(span);
+        pendingTasksList.appendChild(li);
+
+        checkbox.addEventListener('click', function() {
+            if (!li.classList.contains('completed')) {
+                markTaskAsCompleted(li);
+            } else {
+                markTaskAsPending(li);
+            }
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'delete';
+        deleteButton.addEventListener('click', function() {
+            li.remove();
+        });
+        li.appendChild(deleteButton);
+    }
+
+    function markTaskAsCompleted(task) {
+        pendingTasksList.removeChild(task);
+        completedTasksList.appendChild(task);
+        task.classList.add('completed');
+    }
+
+    function markTaskAsPending(task) {
+        completedTasksList.removeChild(task);
+        pendingTasksList.appendChild(task);
+        task.classList.remove('completed');
+    }
+});
+</script>
+
+</body>
+</html>
